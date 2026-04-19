@@ -1,1 +1,46 @@
+/* L'importation de base de Tailwind v4 */
 @import "tailwindcss";
+
+/* 1. Nos polices Google (Montserrat & Playfair) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+
+/* 2. Configuration Tailwind v4 */
+@theme {
+  /* Nos couleurs "Luxe" */
+  --color-brand-light: #FAFAFA;
+  --color-brand-dark: #1A1A1A;
+  --color-brand-primary: #166534;
+  --color-brand-accent: #D4AF37;
+
+  /* Remplacement des polices par défaut */
+  --font-sans: 'Montserrat', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+}
+
+/* 3. Le style global de la page */
+body {
+  background-color: var(--color-brand-light);
+  color: var(--color-brand-dark);
+  
+
+  background-color: #050505;
+
+}
+/* Animation de défilement horizontal infini (Marquee) */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 20s linear infinite;
+}
+
+/* Pause l'animation quand on passe la souris dessus */
+.animate-marquee:hover {
+  animation-play-state: paused;
+}

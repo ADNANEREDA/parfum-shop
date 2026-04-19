@@ -1,89 +1,100 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 
-function App() {
-  const [perfumes, setPerfumes] = useState([]);
+import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import Navbar from './components/common/Navbar';
+import Home from './pages/public/Home';
+import Login from './pages/public/Login';
+import Register from './pages/public/Register';
+import Dashboard from './pages/public/DashboardUser';
+import Catalog from './pages/public/Catalog'; 
+import ProductDetails from './pages/shop/ProductDetails';
+import Wishlist from './pages/public/Wishlist';
+import { CartProvider } from './context/CartContext';
+import { WishlistProvider } from './context/WishlistContext';
+import Cart from './pages/public/Cart';
+import Checkout from './pages/public/Checkout';
+import DashboardAdmin from './pages/admin/DashboardAdmin';
+import AddProduct from './pages/admin/AddProduct';
+import EditProduct from './pages/admin/EditProduct';
+import NewArrivals from './pages/public/NewArrivals';
+import GiftSets from './pages/public/GiftSets';
+import Contact from './pages/public/Contact';
+import Footer from './components/layout/Footer';
+import NotFound from './pages/public/NotFound';
+import ScrollToTop from './components/common/ScrollToTop';
+import { Toaster } from 'react-hot-toast';
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/perfumes')
-      .then((response) => {
-        setPerfumes(response.data);
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la récupération des parfums :", error);
-      });
-  }, []);
 
+
+const MainLayout = () => {
   return (
-    // Arrière-plan de la page et marges
-    <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        
-        {/* Titre principal */}
-        <h1 className="text-4xl font-extrabold text-center text-gray-900 mb-12 tracking-tight">
-          Ma Boutique de Parfums 🌟
-        </h1>
-
-        {/* Affichage conditionnel : Chargement ou Liste */}
-        {perfumes.length === 0 ? (
-          <div className="flex justify-center items-center h-40">
-            <p className="text-xl text-gray-500 font-medium animate-pulse">
-              Chargement des parfums...
-            </p>
-          </div>
-        ) : (
-          /* Grille responsive : 1 col (mobile), 2 (tablette), 3 ou 4 (PC) */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            
-            {perfumes.map((perfume) => (
-              /* Carte du parfum */
-              <div 
-                key={perfume._id} 
-                className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100 flex flex-col"
-              >
-                {/* Zone de l'image */}
-                <div className="h-56 w-full bg-gray-200 overflow-hidden">
-                  <img 
-                    src={perfume.imageUrl} 
-                    alt={perfume.name} 
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                    // Si l'image ne charge pas, on met une image par défaut
-                    onError={(e) => { e.target.src = 'https://via.placeholder.com/300x300?text=Parfum' }} 
-                  />
-                </div>
-
-                {/* Contenu de la carte */}
-                <div className="p-6 flex-grow flex flex-col">
-                  <div className="flex justify-between items-start mb-2">
-                    <h2 className="text-xl font-bold text-gray-900">{perfume.name}</h2>
-                    <span className="bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full">
-                      {perfume.category}
-                    </span>
-                  </div>
-                  
-                  <p className="text-sm text-gray-500 font-semibold mb-4 uppercase tracking-wider">
-                    {perfume.brand}
-                  </p>
-                  
-                  {/* flex-grow pousse le prix vers le bas même si la description est courte */}
-                  <p className="text-gray-600 text-sm mb-6 flex-grow">
-                    {perfume.description}
-                  </p>
-                  
-                  {/* Ligne du bas : Prix et Contenance */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <span className="text-2xl font-black text-gray-900">{perfume.price} €</span>
-                    <span className="text-sm font-medium text-gray-500">{perfume.size} ml</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-
-          </div>
-        )}
-      </div>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <ScrollToTop />
+      <main className="grow">
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   );
-}
+};
+
+const App = () => {
+  return (
+    <CartProvider>
+      <WishlistProvider>
+        <Toaster 
+            position="top-center"
+            reverseOrder={false}
+            toastOptions={{
+              // Style des notifications
+              style: {
+                background: '#0a0a0a', 
+                color: '#fff',         
+                border: '1px solid rgba(255,255,255,0.1)', 
+                borderRadius: '0px',   
+                fontSize: '10px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.2em',
+                fontFamily: 'sans-serif',
+                fontWeight: 'bold',
+                padding: '16px 24px',
+              },
+              success: {
+                iconTheme: {
+                  primary: '#D4AF37', 
+                  secondary: '#000',
+                },
+              },
+            }}
+          />
+        <Router>
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/perfumes" element={<Catalog />} /> 
+              <Route path="/new-arrivals" element={<NewArrivals />} />
+              <Route path="/gift-sets" element={<GiftSets />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/admin/product/new" element={<AddProduct />} />
+              <Route path="/admin/product/:id/edit" element={<EditProduct />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/admin/dashboard" element={<DashboardAdmin />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+
+            {/* Ces pages sont réservées à l'authentification */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            
+          </Routes>
+        </Router>
+      </WishlistProvider>
+    </CartProvider>
+  );
+};
 
 export default App;
