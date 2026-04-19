@@ -1,8 +1,8 @@
-# ✨ ParfumShop - Premium E-Commerce Platform ✨
+#  ParfumShop - Premium E-Commerce Platform 
 
 **ParfumShop** is a Full-Stack (MERN) e-commerce web application designed for selling luxury perfumes. It offers a premium user experience with an elegant interface (Dark Mode), a dynamic cart system, and secure order and authentication management.
 
-## 🚀 Key Features
+##  Key Features
 
 ### 👤 Client Experience (User)
 * **Dynamic Catalog:** Browse a curated selection of luxury perfumes.
