@@ -9,7 +9,7 @@ const GiftSets = () => {
   useEffect(() => {
     const fetchGiftSets = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/products');
+        const { data } = await axios.get('https://parfum-shop-seven.vercel.app/api/products');
         
         const sets = data.filter(product => product.category === 'Coffret' || product.category === 'Gift Set');
         

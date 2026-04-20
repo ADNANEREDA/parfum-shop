@@ -17,7 +17,7 @@ const Login = () => {
     setError(null);     
 
     try {
-      const { data } = await axios.post('http://localhost:5000/api/auth/login', {
+      const { data } = await axios.post('https://parfum-shop-seven.vercel.app/api/auth/login', {
         email,
         password,
       });

@@ -32,9 +32,9 @@ const DashboardAdmin = () => {
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
 
       const [ordersRes, usersRes, productsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/orders', config),
-        axios.get('http://localhost:5000/api/users', config).catch(() => ({ data: [] })),
-        axios.get('http://localhost:5000/api/products')
+        axios.get('https://parfum-shop-seven.vercel.app/api/orders', config),
+        axios.get('https://parfum-shop-seven.vercel.app/api/users', config).catch(() => ({ data: [] })),
+        axios.get('https://parfum-shop-seven.vercel.app/api/products')
       ]);
 
       setOrders(ordersRes.data);
@@ -58,7 +58,7 @@ const DashboardAdmin = () => {
   const deliverHandler = async (orderId) => {
       try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-        await axios.put(`http://localhost:5000/api/orders/${orderId}/deliver`, {}, config);
+        await axios.put(`https://parfum-shop-seven.vercel.app/api/orders/${orderId}/deliver`, {}, config);
         fetchDashboardData(); 
         toast.success('Order marked as delivered');
       } catch (err) {
@@ -70,7 +70,7 @@ const DashboardAdmin = () => {
     if (window.confirm('Es-tu sûr de vouloir supprimer ce parfum définitivement ?')) {
       try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-        await axios.delete(`http://localhost:5000/api/products/${id}`, config);
+        await axios.delete(`https://parfum-shop-seven.vercel.app/api/products/${id}`, config);
         toast.success('Fragrance permanently removed');
         fetchDashboardData(); 
       } catch (err) {
@@ -84,7 +84,7 @@ const DashboardAdmin = () => {
     if (imagePath.startsWith('http')) return imagePath; 
     
     const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-    return `http://localhost:5000${cleanPath}`; 
+    return `https://parfum-shop-seven.vercel.app${cleanPath}`; 
   };
 
   const totalRevenue = orders.reduce((acc, order) => acc + order.totalPrice, 0);

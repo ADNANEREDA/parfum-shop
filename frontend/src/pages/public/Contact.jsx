@@ -38,7 +38,7 @@ const Contact = () => {
     setStatus(null);
 
     try {
-      await axios.post('http://localhost:5000/api/contact', formData);
+      await axios.post('https://parfum-shop-seven.vercel.app/api/contact', formData);
 
       setStatus({ type: 'success', text: 'Message sent successfully! Our team will contact you soon.' });
       setFormData({ name: '', email: '', subject: '', message: '' });

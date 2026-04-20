@@ -15,7 +15,7 @@ const Footer = () => {
     setStatus(null);
 
     try {
-      await axios.post('http://localhost:5000/api/newsletter', { email });
+      await axios.post('https://parfum-shop-seven.vercel.app/api/newsletter', { email });
       setStatus({ type: 'success', text: 'Welcome to the club!' });
       toast.success('Subscribed successfully!');
       setEmail('');

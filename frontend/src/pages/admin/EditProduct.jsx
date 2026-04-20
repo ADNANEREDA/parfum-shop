@@ -31,7 +31,7 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/api/products/${productId}`);
+        const { data } = await axios.get(`https://parfum-shop-seven.vercel.app/api/products/${productId}`);
         setFormData({
           name: data.name,
           brand: data.brand,
@@ -71,7 +71,7 @@ const EditProduct = () => {
 
     try {
       const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-      const { data } = await axios.post('http://localhost:5000/api/upload', formDataUpload, config);
+      const { data } = await axios.post('https://parfum-shop-seven.vercel.app/api/upload', formDataUpload, config);
 
       const formattedPath = data.replace(/\\/g, '/');
       const finalPath = formattedPath.startsWith('/') ? formattedPath : `/${formattedPath}`;
@@ -90,7 +90,7 @@ const EditProduct = () => {
     setLoading(true);
     try {
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-      await axios.put(`http://localhost:5000/api/products/${productId}`, formData, config);
+      await axios.put(`https://parfum-shop-seven.vercel.app/api/products/${productId}`, formData, config);
 
       toast.success('Fragrance updated successfully!');
       navigate('/admin/dashboard');
@@ -104,7 +104,7 @@ const EditProduct = () => {
     if (!imagePath) return '';
     if (imagePath.startsWith('http')) return imagePath;
     const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-    return `http://localhost:5000${cleanPath}`;
+    return `https://parfum-shop-seven.vercel.app${cleanPath}`;
   };
 
   if (fetching) return <div className="min-h-screen bg-[#050505] text-white flex justify-center items-center">Loading Fragrance Data...</div>;

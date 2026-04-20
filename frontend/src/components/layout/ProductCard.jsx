@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
     if (imagePath.startsWith('http')) return imagePath;
     
     const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-    return `http://localhost:5000${cleanPath}`;
+    return `https://parfum-shop-seven.vercel.app${cleanPath}`;
   };
 
   return (

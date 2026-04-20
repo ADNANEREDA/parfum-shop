@@ -23,7 +23,7 @@ const Register = () => {
     }
 
     try {
-      const { data } = await axios.post('http://localhost:5000/api/auth/register', {
+      const { data } = await axios.post('https://parfum-shop-seven.vercel.app/api/auth/register', {
         firstName,
         lastName,
         email,

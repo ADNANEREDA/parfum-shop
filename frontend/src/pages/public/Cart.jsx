@@ -5,7 +5,7 @@ import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react';
 const Cart = () => {
   const { cartItems, addToCart, removeFromCart } = useCart();
   
-  const BACKEND_URL = "http://localhost:5000";
+  const BACKEND_URL = "https://parfum-shop-seven.vercel.app";
 
   const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.qty), 0);
 

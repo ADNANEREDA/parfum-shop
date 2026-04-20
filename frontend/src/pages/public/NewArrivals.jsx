@@ -9,7 +9,7 @@ const NewArrivals = () => {
   useEffect(() => {
     const fetchLatestProducts = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/products');
+        const { data } = await axios.get('https://parfum-shop-seven.vercel.app/api/products');
         
         const newProducts = data.reverse().slice(0, 8); 
         

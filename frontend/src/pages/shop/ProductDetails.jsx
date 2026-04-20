@@ -11,7 +11,7 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
 
-  const BACKEND_URL = "http://localhost:5000";
+  const BACKEND_URL = "https://parfum-shop-seven.vercel.app";
 
   useEffect(() => {
     const fetchProduct = async () => {

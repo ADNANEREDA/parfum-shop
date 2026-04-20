@@ -13,7 +13,7 @@ export const WishlistProvider = ({ children }) => {
       if (userInfo && userInfo.token) {
         try {
           const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-          const { data } = await axios.get('http://localhost:5000/api/users/wishlist', config);
+          const { data } = await axios.get('https://parfum-shop-seven.vercel.app/api/users/wishlist', config);
           setWishlistItems(data);
         } catch (error) {
           console.error("Erreur lors du chargement de la wishlist:", error);
@@ -44,7 +44,7 @@ export const WishlistProvider = ({ children }) => {
       try {
         const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
         await axios.post(
-          'http://localhost:5000/api/users/wishlist',
+          'https://parfum-shop-seven.vercel.app/api/users/wishlist',
           { productId: product._id },
           config
         );

@@ -9,7 +9,7 @@ const Checkout = () => {
   const { cartItems, clearCart } = useCart();
   const navigate = useNavigate();
 
-  const BACKEND_URL = "http://localhost:5000";
+  const BACKEND_URL = "https://parfum-shop-seven.vercel.app";
   
 
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));

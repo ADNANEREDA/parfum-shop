@@ -42,7 +42,7 @@ const AddProduct = () => {
 
     try {
       const config = { headers: { 'Content-Type': 'multipart/form-data' } };
-      const { data } = await axios.post('http://localhost:5000/api/upload', formDataUpload, config);
+      const { data } = await axios.post('https://parfum-shop-seven.vercel.app/api/upload', formDataUpload, config);
       
       const formattedPath = data.replace(/\\/g, '/');
       const finalPath = formattedPath.startsWith('/') ? formattedPath : `/${formattedPath}`;
@@ -66,7 +66,7 @@ const AddProduct = () => {
     setLoading(true);
     try {
       const config = { headers: { Authorization: `Bearer ${userInfo.token}` } };
-      await axios.post('http://localhost:5000/api/products', formData, config);
+      await axios.post('https://parfum-shop-seven.vercel.app/api/products', formData, config);
       
       toast.success('Fragrance created successfully!');
       navigate('/admin/dashboard'); 
@@ -80,7 +80,7 @@ const AddProduct = () => {
     if (!imagePath) return '';
     if (imagePath.startsWith('http')) return imagePath; 
     const cleanPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-    return `http://localhost:5000${cleanPath}`;
+    return `https://parfum-shop-seven.vercel.app${cleanPath}`;
   };
 
   return (
